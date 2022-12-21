@@ -8,9 +8,11 @@ LABEL "com.github.actions.color"="teal"
 LABEL "repository"="http://github.com/zooniverse/middleman-gh-pages-action"
 
 RUN apt-get update; \
-    apt-get install -y --no-install-recommends git nodejs && \
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    git \
+    nodejs && \
     apt-get clean && rm -fr /var/lib/apt/lists/*
-
 
 ADD entrypoint.sh /entrypoint.sh
 
