@@ -91,6 +91,12 @@ main() {
 
   enable_expanded_output
 
+  echo 'Running git diff'
+  if ! git diff --exit-code --quiet --cached; then
+    echo Aborting due to uncommitted changes in the index >&2
+    return 1
+  fi
+
   commit_title=`git log -n 1 --format="%s" HEAD`
   echo "The commit title: ${commit_title}"
   commit_hash=` git log -n 1 --format="%H" HEAD`
