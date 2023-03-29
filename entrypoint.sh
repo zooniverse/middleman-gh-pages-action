@@ -2,6 +2,10 @@
 set -o errexit #abort if any command fails
 me=$(basename "$0")
 
+# fix the gh action runner issue with git dir ownership
+# see https://github.com/actions/checkout/issues/766 for details
+git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
 help_message="\
 Usage: $me [-c FILE] [<options>]
 Deploy generated files to a git branch.
